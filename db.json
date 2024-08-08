@@ -94,7 +94,7 @@
       {
         "date": "2022-07-09",
         "description": "Office lunch Wednesday",
-        "category": "Food",
+        "category": "Food", 
         "amount": "3000",
         "id": 14
       }
