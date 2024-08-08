@@ -4,10 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const balanceElement = document.querySelector('#balance');
     const form = document.querySelector('#transaction-form');
 
-    // Initialize transactions array
     let transactions = [];
 
-    // Function to update the table with transactions
+
     function updateTable() {
         tableBody.innerHTML = ''; // Clear existing rows
         transactions.forEach((transaction, index) => {
@@ -50,30 +49,30 @@ document.addEventListener('DOMContentLoaded', function() {
         balanceElement.textContent = total.toFixed(2);
     }
 
-    // Fetch initial data from db.json
+  
     fetch('db.json')
         .then(response => response.json())
         .then(data => {
-            transactions = data.transactions; // Load transactions
-            updateTable(); // Populate table
-            updateBalance(); // Set initial balance
+            transactions = data.transactions; 
+            updateTable();
+            updateBalance(); 
         })
         .catch(error => {
             console.error('Error fetching transactions:', error);
         });
 
-    // Handle form submission to add new transaction
+    
     form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault(); 
 
         const date = document.querySelector('#date').value;
         const description = document.querySelector('#description').value;
         const category = document.querySelector('#category').value;
         const amount = parseFloat(document.querySelector('#amount').value);
 
-        // Create new transaction object
+     
         const newTransaction = { date, description, category, amount };
-        transactions.push(newTransaction); // Add to transactions array
+        transactions.push(newTransaction);
 
         updateTable(); // Refresh table with new transaction
         updateBalance(); // Update balance
