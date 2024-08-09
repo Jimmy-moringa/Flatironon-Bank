@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     const tableBody = document.querySelector('#transactions-table tbody');
     const balanceElement = document.querySelector('#balance');
@@ -26,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
             row.appendChild(categoryCell);
 
             const amountCell = document.createElement('td');
-            amountCell.textContent = transaction.amount.toFixed(2);
+            amountCell.textContent = parseFloat(transaction.amount).toFixed(2);
             row.appendChild(amountCell);
 
             const actionCell = document.createElement('td');
@@ -50,11 +49,14 @@ document.addEventListener('DOMContentLoaded', function() {
         balanceElement.textContent = total.toFixed(2);
     }
 
-    // Fetch initial data from db.json
+    // Fetch data from db.json
     fetch('db.json')
         .then(response => response.json())
         .then(data => {
-            transactions = data.transactions; // Load transactions
+            transactions = data.transactions.map(transaction => ({
+                ...transaction,
+                amount: parseFloat(transaction.amount) // Ensure amount is a number
+            }));
             updateTable(); // Populate table
             updateBalance(); // Set initial balance
         })
@@ -64,16 +66,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle form submission to add new transaction
     form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault();
 
         const date = document.querySelector('#date').value;
         const description = document.querySelector('#description').value;
         const category = document.querySelector('#category').value;
         const amount = parseFloat(document.querySelector('#amount').value);
 
-        // Create new transaction object
+        if (isNaN(amount) || amount <= 0) {
+            alert('Invalid amount. Please enter a positive number.');
+            return;
+        }
+
         const newTransaction = { date, description, category, amount };
-        transactions.push(newTransaction); // Add to transactions array
+        transactions.push(newTransaction);
 
         updateTable(); // Refresh table with new transaction
         updateBalance(); // Update balance
@@ -81,3 +87,4 @@ document.addEventListener('DOMContentLoaded', function() {
         form.reset(); // Clear form inputs
     });
 });
+
