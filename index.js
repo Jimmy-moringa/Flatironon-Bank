@@ -87,4 +87,3 @@ document.addEventListener('DOMContentLoaded', function() {
         form.reset(); // Clear form inputs
     });
 });
-
