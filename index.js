@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Delete';
             deleteButton.addEventListener('click', () => {
-                transactions.splice(index, 1); // Remove transaction delete on button click
+                transactions.splice(index, 1); // Remove transaction delete on button click that is the delet button
                 updateTable(); 
                 updateBalance(); // Refresh bal..
             });
