@@ -3,12 +3,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const balanceElement = document.querySelector('#balance');
     const form = document.querySelector('#transaction-form');
 
-    // Initialize transactions array
+    // Initialize all of thetransactions 
     let transactions = [];
 
     // Function to update the table with transactions
     function updateTable() {
-        tableBody.innerHTML = ''; // Clear existing rows
+        tableBody.innerHTML = '';
         transactions.forEach((transaction, index) => {
             const row = document.createElement('tr');
 
@@ -32,9 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Delete';
             deleteButton.addEventListener('click', () => {
-                transactions.splice(index, 1); // Remove transaction
-                updateTable(); // Refresh table
-                updateBalance(); // Refresh balance
+                transactions.splice(index, 1); // Remove transaction delete on button click
+                updateTable(); 
+                updateBalance(); // Refresh bal..
             });
             actionCell.appendChild(deleteButton);
             row.appendChild(actionCell);
@@ -57,8 +57,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 ...transaction,
                 amount: parseFloat(transaction.amount) // Ensure amount is a number
             }));
-            updateTable(); // Populate table
-            updateBalance(); // Set initial balance
+            updateTable(); 
+            // Set initial balance from db.json
+            updateBalance(); // Set initial balance from db.json
         })
         .catch(error => {
             console.error('Error fetching transactions:', error);
@@ -73,17 +74,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const category = document.querySelector('#category').value;
         const amount = parseFloat(document.querySelector('#amount').value);
 
-        if (isNaN(amount) || amount <= 0) {
-            alert('Invalid amount. Please enter a positive number.');
-            return;
-        }
+
 
         const newTransaction = { date, description, category, amount };
         transactions.push(newTransaction);
+// Refresh table with new transaction
+        updateTable(); 
+        updateBalance();
 
-        updateTable(); // Refresh table with new transaction
-        updateBalance(); // Update balance
-
-        form.reset(); // Clear form inputs
+        form.reset(); // Clear form inputs atersubmission of the form..
     });
 });

@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flariton Bank</title>
+    <title>Flatiron Bank</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <h1 >Flariton Bank</h1>
+    <h1 > THE FLATIRON BANK</h1>
     <h3></h3>
 
     <div id="balance-container">
@@ -31,17 +31,13 @@
             <option value="Income">Income</option>
             <option value="Gift">Gift</option>
         </select>
-        <label for="amount">Amount:</label>
-        <input type="number" id="amount" step="0.01" required>
+        <label for="amount">Amount:(if expense start with -ve sign)</label>
+        <input type="number" id="amount" step="0.01" required placeholder="">
         <button type="submit">Add Transaction</button>
     </form>
 
     <h2>Transaction History</h2>
-   <!-- table that contains all transactions  -->
-    
-
-
-
+  
     <table id="transactions-table">
         <thead>
             <tr>
